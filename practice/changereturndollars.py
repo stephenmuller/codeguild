@@ -5,7 +5,7 @@ payment = float(input())
 
 dollars = payment // 1
 print(str(payment))
-cents = payment - dollars
+cents = (payment - dollars) * 100
 
 hundreds = dollars // 100
 dollars = dollars % 100
@@ -35,5 +35,5 @@ print('Your change will be, ' +
     str(int(ones)) + ' ones ' +
     str(int(quarters)) + ' quarters, ' +
     str(int(dimes)) + ' dimes, ' +
-      str(int(nickels)) + ' nickels, and ' +
-       str(int(pennies)) + ' pennies.')
+    str(int(nickels)) + ' nickels, and ' +
+    str(int(pennies)) + ' pennies.')
