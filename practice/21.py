@@ -1,5 +1,8 @@
 """Gives blackjack advice"""
 
+
+###investigate else branches and ranges more
+
 # input
 print('What is your first card? A 2 3 4 5 6 7 8 9 J Q K:   ')
 card_one = input()
