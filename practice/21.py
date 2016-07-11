@@ -7,9 +7,9 @@
 players_card_second_total = 'none'
 
 # input
-print('What is your first card? A 1 2 3 4 5 6 7 8 9 J Q K:   ')
+print('What is your first card? A 2 3 4 5 6 7 8 9 J Q K:   ')
 players_card_one = input()
-print('What is your second card? A 1 2 3 4 5 6 7 8 9 J Q K:   ')
+print('What is your second card? A 2 3 4 5 6 7 8 9 J Q K:   ')
 players_card_two = input()
 
 # transform
@@ -80,7 +80,7 @@ if players_card_initial_total > 21 and players_card_two_int == 11:
 # output
 if players_card_initial_total < 17:
     print('You\'re under 17, with a score of:' + str(players_card_initial_total) + ' hit!')
-    players_card_three = input('What did you draw? A 1 2 3 4 5 6 7 8 9 J Q K:   ')
+    players_card_three = input('What did you draw? A 2 3 4 5 6 7 8 9 J Q K:   ')
     if players_card_three == 'A':
         players_card_three_int = 11
     elif players_card_three == '1':
@@ -133,10 +133,10 @@ elif players_card_initial_total == 21:
 elif players_card_initial_total or players_card_second_total >= 17:
     print('You\'re over 17, I reccomend you stay.')
 
-print('\n\n')
-
-# output variables for transparency
-print('these are the variable values for testing: ')
-print('players_card_one: ' + str(players_card_one_int))
-print('players_card_two: ' + str(players_card_two_int))
-print('players_card_initial_total: ' + str(int(players_card_initial_total)))
+# print('\n\n')
+#
+# # output variables for transparency
+# print('these are the variable values for testing: ')
+# print('players_card_one: ' + str(players_card_one_int))
+# print('players_card_two: ' + str(players_card_two_int))
+# print('players_card_initial_total: ' + str(int(players_card_initial_total)))
