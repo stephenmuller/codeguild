@@ -43,3 +43,4 @@ print('your project will cost $' + str(int(total_cost)))
 
 
 # it's calculating the amount of paint vs
+# use a list to store the wall area
