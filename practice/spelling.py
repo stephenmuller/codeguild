@@ -4,21 +4,28 @@
 ie_check = 'ie'
 ei_check = 'ei'
 cie_check = 'cie'
+cei_check = 'cei'
 # input
 
 word = input('word to check: ')
 if word == '':
-    word = 'ceiling'
+    word = 'believe'
 
 # transform
 
-if ie_check in word:
-    if cie_check in word:
-        print(word + ' does follow the rule')
-    print('wohoo')
-
-
+if ie_check in word and cie_check not in word:
+    follows_rule = True
+    print('yay!') # test print
+elif cei_check in word:
+    follows_rule = True
+    print('yay2!') # test print
 else:
-    print('ugh.')
+    follows_rule = False
+    print('nope') # test print
 
 # output
+
+if follows_rule == True:
+    print(word + 'does follow the rule')
+else follows_rule == False:
+    print(word + 'doesn\'t follow the rule')
