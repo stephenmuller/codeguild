@@ -1,8 +1,5 @@
 """"Converts distances between unit types"""
 
-# setup
-
-
 # 1. Define
 
 
@@ -62,51 +59,3 @@ def main():
     return output
 
 main()
-
-
-# 3. Input
-
-# 4. Transform
-# 5. Output
-
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-
-#
-#
-# #2. Input
-
-#
-# #3. Transform to Meters
-#
-# if starting_unit == 'mi':
-#     distance_in_converted_unit = MI_TO_M * distance_in_starting_unit
-# if starting_unit == 'km':
-#     distance_in_converted_unit = KM_TO_M * distance_in_starting_unit
-# if starting_unit == 'ft':
-#     distance_in_converted_unit = FT_TO_M * distance_in_starting_unit
-# if starting_unit == 'm':
-#     distance_in_converted_unit = distance_in_starting_unit
-#
-# #3b. Transform to Output
-# if output_unit == 'm':
-#     distance_in_output_unit = distance_in_converted_unit
-# if output_unit == 'mi':
-#     distance_in_output_unit = distance_in_converted_unit / float(MI_TO_M)
-# if output_unit == 'km':
-#     distance_in_output_unit = distance_in_converted_unit / KM_TO_M
-# if output_unit == 'ft':
-#     distance_in_output_unit = distance_in_converted_unit / FT_TO_M
-#
-#
-# #4. Output
-#
-# print('Output: ' + str(distance_in_output_unit))
