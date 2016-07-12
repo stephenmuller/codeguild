@@ -14,11 +14,7 @@ card_two = input()
 
 if card_one == 'A':
     points_one = 11
-elif card_one == 'J':
-    points_one = 10
-elif card_one == 'Q':
-    points_one = 10
-elif card_one == 'K':
+elif card_one == 'J' or card_one == 'Q' or card_one == 'K':
     points_one = 10
 else:
      points_one = int(card_one)
@@ -26,12 +22,9 @@ else:
 
 if card_two == 'A':
     points_two = 11
-elif card_two == 'J':
+elif card_two == 'J' or card_two == 'Q' or card_two == 'K':
     points_two = 10
-elif card_two == 'Q':
-    points_two = 10
-elif card_two == 'K':
-    points_two = 10
+
 else:
     points_two = int(card_two)
 
