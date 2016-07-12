@@ -15,17 +15,18 @@ if word == '':
 
 if ie_check in word and cie_check not in word:
     follows_rule = True
-    print('yay!') # test print
+    # print('yay!')  # test print
 elif cei_check in word:
     follows_rule = True
-    print('yay2!') # test print
+    # print('yay2!')  # test print
 else:
     follows_rule = False
-    print('nope') # test print
+    # print('nope')  # test print
 
 # output
 
-if follows_rule == True:
-    print(word + 'does follow the rule')
-else follows_rule == False:
-    print(word + 'doesn\'t follow the rule')
+if follows_rule is True:
+    print(word + ' does follow the rule')
+
+else:
+    print(word + ' doesn\'t follow the rule')
