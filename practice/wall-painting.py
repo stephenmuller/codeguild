@@ -17,7 +17,7 @@ print('How much does paint cost per gallon?')
 paint_cost_dollars = float(input())
 
 # add additional walls
-while walls_to_paint > 0:
+while walls_to_paint > 0:  ##### use range here
     print('How wide is your wall?')
     wall_width_feet = float(input())
 
