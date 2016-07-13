@@ -1,10 +1,10 @@
 """Wall Painting"""
 # pull in math for cieling function#
 import math
-# set wall area to 0#
-wall_area = 0
+# set starting value for wall area so it can be added to
+wall_area_sqft = 0
 # 1 gallon covers 400sq ft
-ONE_GALLON_AREA = 400 # square feet
+ONE_GALLON_COVERS = 400 # square feet
 
 # establish the user data
 print('How many walls do you plan on painting?')
@@ -19,28 +19,27 @@ paint_cost_dollars = float(input())
 # add additional walls
 while walls_to_paint > 0:
     print('How wide is your wall?')
-    wall_width = float(input())
+    wall_width_feet = float(input())
 
     print('How high is your wall?')
-    wall_height = float(input())
+    wall_height_feet = float(input())
 
-    wall_area = wall_width * wall_height + wall_area
+    wall_area_sqft += wall_width_feet * wall_height_feet
     walls_to_paint -= 1
     if walls_to_paint >= 1:
         print('and the next wall:')
 
 
-print('wallarea = ' + str(int(wall_area)) + ' sq ft')
+print('wallarea = ' + str(int(wall_area_sqft)) + ' sq ft')
 
 
-gallons_needed = wall_area / ONE_GALLON_AREA
-print('the number of coats is ' + str(int(coats_of_paint)))
-print('gallonsneeded = ' + str(float(gallons_needed)))
+paint_needed_for_area = wall_area_sqft / ONE_GALLON_COVERS
+# print('the number of coats is ' + str(int(coats_of_paint)))
+# print('gallonsneeded = ' + str(float(gallons_needed)))
 
-gallons_needed = gallons_needed * coats_of_paint
-gallons_needed = math.ceil(gallons_needed)
-print('gallonsneeded = ' + str(float(gallons_needed)))
+gallons_needed = paint_needed_for_area * coats_of_paint
+min_gallons_purchaseable = math.ceil(gallons_needed)
 
 
-total_cost = gallons_needed * paint_cost_dollars
+total_cost = min_gallons_purchaseable * paint_cost_dollars
 print('your project will cost $' + str(int(total_cost)))
