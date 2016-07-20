@@ -198,7 +198,7 @@ def find_rainiest_year(year_rain_list):
     >>> find_rainiest_year([['2002', 5], ['2015', 10]])
     '2015'
     """
-    
+
     year_rain_dict = {x[1]: x[0] for x in year_rain_list}
     max_year = max(year_rain_dict)
     val_of_max = year_rain_dict[max_year]
