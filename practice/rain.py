@@ -11,6 +11,7 @@ import statistics
 
 def import_rain_data_doc():
     """Read file into list of lines."""
+
     with open('rain_data_easy.txt', newline='') as f:
         lines = f.readlines()
     return lines
@@ -88,6 +89,7 @@ def calculate_rain_by_year(date_rainfall_list, years_list):
     >>> calculate_rain_by_year([['12-FEB-2002', 5], ['12-MAR-2015', 10]], ['2002', '2015'])
     [['2002', 5], ['2015', 10]]
     """
+
     year_rain_total_list = []
     for year in years_list:
         rainfall_total = 0
@@ -118,7 +120,7 @@ def calculate_rain_by_date(date_rain, days_list):
     >>> calculate_rain_by_date([['12-FEB-2002', 5], ['12-FEB-2012', 5], ['12-MAR-2015', 10]], ['12-MAR', '12-FEB'])
     {'12-MAR': [10], '12-FEB': [5, 5]}
     """
-    
+
     list_of_averages = {}
     for day in days_list:
         rain_val_list = []
@@ -184,6 +186,7 @@ def generate_list_of_years(data_table):
     >>> sorted(generate_list_of_years([['12-FEB-2002', 5], ['12-MAR-2015', 10]]))
     ['2002', '2015']
     """
+
     years = [date[7:13] for date, rain in data_table]
     output = (list(set(years)))
     return output
@@ -195,6 +198,7 @@ def find_rainiest_year(year_rain_list):
     >>> find_rainiest_year([['2002', 5], ['2015', 10]])
     '2015'
     """
+    
     year_rain_dict = {x[1]: x[0] for x in year_rain_list}
     max_year = max(year_rain_dict)
     val_of_max = year_rain_dict[max_year]
