@@ -19,8 +19,8 @@ def import_rain_data_doc():
 def get_relavent_lines(input_doc_string):
     r""" Takes the list of lines and strips off the lines that have no valid data in them.
 
-    #>>> get_relavent_lines(['a \n'], ['a \n'], ['a \n'], ['a \n'], ['a \n'], ['a \n'], ['a \n'], ['a \n'], ['a \n'], ['a \n'], ['a \n'],  ['first relevant line'])
-    ['first relevant line']
+    >>> get_relavent_lines(['a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n',  'first relevant line', 'second relevant line'])
+    [['first relevant line'], ['second relevant line']]
     """
 
     lines_in_doc = [x.strip().split('\n') for x in input_doc_string]
@@ -30,7 +30,11 @@ def get_relavent_lines(input_doc_string):
 
 def make_lines_lists(bloated_lines):
     """"Takes the list of lines and turns them into a nested list.
+
+    >>> make_lines_lists([['99-MON-1999 0 0 0 0 0 0 0']])
+    [['99-MON-1999', '0', '0', '0', '0', '0', '0', '0']]
     """
+
     output = []
     for date_strings in bloated_lines:
         output += [z.split() for z in date_strings]
@@ -38,7 +42,12 @@ def make_lines_lists(bloated_lines):
 
 
 def purge_unneccessary_data(bloated_lists):
-    """Takes the nested lists and returns a nested list with only the date and value."""
+    """Takes the nested lists and returns a nested list with only the date and value.
+
+    >>> purge_unneccessary_data([['99-MON-1999', '0', '0', '0', '0', '0', '0', '0']])
+    [['99-MON-1999', '0']]
+    """
+
     output = []
     for x in bloated_lists:
         output += [x[0:2]]
@@ -46,7 +55,12 @@ def purge_unneccessary_data(bloated_lists):
 
 
 def convert_to_int(date_rain_pairs):
-    """Takes the pairs and converts the rain value to an int for calculating statistics"""
+    """Takes the pairs and converts the rain value to an int for calculating statistics
+
+    >>> convert_to_int([['99-MON-1999', '0'], ['88-MON-1999', '-']])
+    [['99-MON-1999', 0]]
+    """
+
     output = []
     for date, rain in date_rain_pairs:
         if rain != '-':
@@ -61,18 +75,23 @@ def check_for_most_rain(pairs):
     >>> check_for_most_rain([['12-FEB-2002', 5], ['12-MAR-2015', 10]])
     '12-MAR-2015'
     """
+
     rainfall_to_date_dict = {date_rain[1]: date_rain[0] for date_rain in pairs}
     maximum_rain_per_day = max(rainfall_to_date_dict)
     output = rainfall_to_date_dict[maximum_rain_per_day]
     return output
 
 
-def calculate_rain_by_year(date_rainfall, years):
-    """Returns a list of years and their total rainfall"""
+def calculate_rain_by_year(date_rainfall_list, years_list):
+    """Returns a list of years and their total rainfall
+
+    >>> calculate_rain_by_year([['12-FEB-2002', 5], ['12-MAR-2015', 10]], ['2002', '2015'])
+    [['2002', 5], ['2015', 10]]
+    """
     year_rain_total_list = []
-    for year in years:
+    for year in years_list:
         rainfall_total = 0
-        for date, rainfall in date_rainfall:
+        for date, rainfall in date_rainfall_list:
             if year in date:
                 rainfall_total += rainfall
         year_rain_total_list += [[year, rainfall_total]]
@@ -80,7 +99,12 @@ def calculate_rain_by_year(date_rainfall, years):
 
 
 def generate_list_of_days(pairs):
-    """generate a list of days given the input document"""
+    """generate a list of days given the input document
+
+    >>> generate_list_of_days([['12-FEB-2002', 5], ['12-MAR-2015', 10]])
+    ['12-FEB', '12-MAR']
+    """
+
     dates = []
     for date, amount in pairs:
         dates += [date[:6]]
@@ -101,6 +125,7 @@ def calculate_rain_by_date(date_rain, days_list):
     return list_of_averages
 
 
+# in progress block to efficiently calculate the rainfall by day of year
 # def calculate_rain_by_date(date_rain, days_list):
 #     """calculates the average rainfall by date of the year"""
 #     date_to_rain_vals = {day: [] for day in days_list}
@@ -159,12 +184,13 @@ def find_rainiest_year(year_rain_list):
     return val_of_max
 
 
-def userio(rain_day_avgs):
-    """ adds user interaction to pull s"""
+# def userio(rain_day_avgs):
+#     """ adds user interaction to pull s"""
 
 
 def output_function(year, day, high_rain_day):
     """ Prints the date of the raniest year and the raniest day"""
+
     print('The raniest year at this sensor was: ' + year)
     print('The raniest day at this sensor was: ' + day)
     print('The highest average rainfall is: ' + high_rain_day)
@@ -173,8 +199,8 @@ def output_function(year, day, high_rain_day):
 
 def main():
     """
-    The main function to pull information about Portland rainfall.
-    """
+    The main function to pull information about Portland rainfall."""
+
     rainfall_data_dump = import_rain_data_doc()
     data_without_header = get_relavent_lines(rainfall_data_dump)
     data_as_lists = make_lines_lists(data_without_header)
