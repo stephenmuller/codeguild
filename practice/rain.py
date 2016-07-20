@@ -6,7 +6,7 @@ Imports rain data from a portland sensor and analyzes various things.
 
 import statistics
 
-from itertools import groupby
+# from itertools import groupby
 
 
 def import_rain_data_doc():
@@ -19,7 +19,7 @@ def import_rain_data_doc():
 def get_relavent_lines(input_doc_string):
     r""" Takes the list of lines and strips off the lines that have no valid data in them.
 
-    >>> get_relavent_lines(['a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n',  'first relevant line', 'second relevant line'])
+    >>> get_relavent_lines(['a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'a \n', 'first relevant line', 'second relevant line'])
     [['first relevant line'], ['second relevant line']]
     """
 
@@ -118,6 +118,7 @@ def calculate_rain_by_date(date_rain, days_list):
     >>> calculate_rain_by_date([['12-FEB-2002', 5], ['12-FEB-2012', 5], ['12-MAR-2015', 10]], ['12-MAR', '12-FEB'])
     {'12-MAR': [10], '12-FEB': [5, 5]}
     """
+    
     list_of_averages = {}
     for day in days_list:
         rain_val_list = []
