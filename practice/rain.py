@@ -186,12 +186,14 @@ def find_rainiest_year(year_rain_list):
     return val_of_max
 
 
-# def userio(rain_day_avgs):
-#     """ adds user interaction to pull s"""
-
-
 def output_function(year, day, high_rain_day):
-    """Prints the date of the rainiest year and the rainiest day"""
+    """Prints the date of the rainiest year and the rainiest day
+
+    >>> output_function('1992', '25-MAR-2132', '13-MAR')
+    The raniest year at this sensor was: 1992
+    The raniest day at this sensor was: 25-MAR-2132
+    The highest average rainfall is: 13-MAR
+    """
     print('The raniest year at this sensor was: ' + year)
     print('The raniest day at this sensor was: ' + day)
     print('The highest average rainfall is: ' + high_rain_day)
@@ -213,7 +215,6 @@ def main():
     list_of_years = generate_list_of_years(date_rainfall_list)
     total_rain_per_year = calculate_rain_by_year(date_rainfall_list, list_of_years)
     most_rain_in_a_year = find_rainiest_year(total_rain_per_year)
-    # userio(average_rain_by_date)
     output_function(most_rain_in_a_year, rainiest_date, highest_average_rainfall_date)
 
 
