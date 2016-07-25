@@ -3,8 +3,9 @@ Imports rain data from a portland sensor and analyzes various things.
 
 """
 
-
+from itertools import groupby
 import statistics
+
 
 def group_by(iterable, key):
     """Place each item in an iterable into a bucket based on calling the key
@@ -18,7 +19,15 @@ def group_by(iterable, key):
     return group_to_items
 
 
-def get_group_by_key():
+def key(list):
+    """generates the keys for group_by
+
+    >>> key(['12-MAR-2015', 5])
+    '2015'
+    """
+    temp = list[0]
+    temp_2 = temp[7:]
+    return temp_2
 
 
 def import_rain_data_doc():
@@ -87,17 +96,21 @@ def calculate_rain_by_year(date_rainfall_list, years_list):
     >>> calculate_rain_by_year([['12-FEB-2002', 5], ['12-MAR-2015', 10]], ['2002', '2015'])
     [['2002', 5], ['2015', 10]]
     """
-    year_rain_dict = {x[1]: x[0] for x in date_rainfall_list}
-    output = group_by(year_rain_dict, years_list)
-    return output
-    # year_rain_total_list = []
-    # for year in years_list:
-    #     rainfall_total = 0
-    #     for date, rainfall in date_rainfall_list:
-    #         if year in date:
-    #             rainfall_total += rainfall
-    #     year_rain_total_list += [[year, rainfall_total]]
-    # return year_rain_total_list
+    groups = []
+    uniquekeys = []
+    for k, g in groupby(date_rainfall_list, years_list):
+        uniquekeys.append(k)
+    # year_rain_dict = {x[0]: x[1] for x in date_rainfall_list}
+    # output = group_by(year_rain_dict, years_list)
+    # return output
+    # # year_rain_total_list = []
+    # # for year in years_list:
+    # #     rainfall_total = 0
+    # #     for date, rainfall in date_rainfall_list:
+    # #         if year in date:
+    # #             rainfall_total += rainfall
+    # #     year_rain_total_list += [[year, rainfall_total]]
+    # # return year_rain_total_list
 
 
 def generate_list_of_days(pairs):
