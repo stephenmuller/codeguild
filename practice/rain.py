@@ -6,7 +6,19 @@ Imports rain data from a portland sensor and analyzes various things.
 
 import statistics
 
-# from itertools import groupby
+def group_by(iterable, key):
+    """Place each item in an iterable into a bucket based on calling the key
+    function on the item."""
+    group_to_items = {}
+    for item in iterable:
+        group = key(item)
+        if group not in group_to_items:
+            group_to_items[group] = []
+        group_to_items[group].append(item)
+    return group_to_items
+
+
+def get_group_by_key():
 
 
 def import_rain_data_doc():
@@ -75,14 +87,17 @@ def calculate_rain_by_year(date_rainfall_list, years_list):
     >>> calculate_rain_by_year([['12-FEB-2002', 5], ['12-MAR-2015', 10]], ['2002', '2015'])
     [['2002', 5], ['2015', 10]]
     """
-    year_rain_total_list = []
-    for year in years_list:
-        rainfall_total = 0
-        for date, rainfall in date_rainfall_list:
-            if year in date:
-                rainfall_total += rainfall
-        year_rain_total_list += [[year, rainfall_total]]
-    return year_rain_total_list
+    year_rain_dict = {x[1]: x[0] for x in date_rainfall_list}
+    output = group_by(year_rain_dict, years_list)
+    return output
+    # year_rain_total_list = []
+    # for year in years_list:
+    #     rainfall_total = 0
+    #     for date, rainfall in date_rainfall_list:
+    #         if year in date:
+    #             rainfall_total += rainfall
+    #     year_rain_total_list += [[year, rainfall_total]]
+    # return year_rain_total_list
 
 
 def generate_list_of_days(pairs):
@@ -112,30 +127,6 @@ def calculate_rain_by_date(date_rain, days_list):
                 rain_val_list += [rain_inches]
                 list_of_averages.update({day: rain_val_list})
     return list_of_averages
-
-
-# in progress block to efficiently calculate the rainfall by day of year
-# def calculate_rain_by_date(date_rain, days_list):
-#     """calculates the average rainfall by date of the year"""
-#     date_to_rain_vals = {day: [] for day in days_list}
-#     date_to_rain_vals.update({date[:6]: rainfall for date, rainfall in date_rain})
-#     print(date_to_rain_vals)
-#     return date_to_rain_vals
-#
-#     date_to_rain_vals = {
-#         group_key: list(grouped_items)
-#         for group_key, grouped_items
-#         # 1. Specify Input
-#         in groupby(my_books, get_author)
-#      }
-#
-# def rm_year_from_date(date_rain_pair):
-#     """
-#     >>> rm_year_from_date(['01-MAR-1998', 54])
-#     '01-MAR'
-#     """
-#     complete_date = date_rain_pair[0]
-#     return complete_date[:6]
 
 
 def calculate_average_rain_by_date(day_rain_dic, days):
