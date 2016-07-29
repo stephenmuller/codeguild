@@ -3,7 +3,7 @@ Imports rain data from a portland sensor and analyzes various things.
 
 """
 
-from itertools import groupby
+
 import statistics
 
 
@@ -15,7 +15,7 @@ def group_by(iterable, key):
         group = key(item)
         if group not in group_to_items:
             group_to_items[group] = []
-        group_to_items[group].append(item)
+        group_to_items[group] += [item[1]]
     return group_to_items
 
 
@@ -30,9 +30,19 @@ def key(list):
     return temp_2
 
 
+def date_key(date_rain_list):
+    """Returns the first 7 characters of the date structure, 12-MAR
+    >>> date_key(['12-MAR-2015', 5])
+    '12-MAR'
+    """
+    temp_1 = date_rain_list[0]
+    temp_2 = temp_1[:6]
+    return temp_2
+
+
 def import_rain_data_doc():
     """Read file into list of lines."""
-    with open('rain_data_easy.txt', newline='') as f:
+    with open('rain_data.txt', newline='') as f:
         lines = f.readlines()
     return lines
 
@@ -93,88 +103,68 @@ def check_for_most_rain(pairs):
 def calculate_rain_by_year(date_rainfall_list):
     """Returns a list of years and their total rainfall
 
-    >>> calculate_rain_by_year([['12-FEB-2002', 5], ['12-MAR-2015', 10]])
-    [['2002', 5], ['2015', 10]]
+    >>> calculate_rain_by_year([['12-FEB-2002', 5], ['12-MAR-2015', 10], ['13-MAR-2015', 12]])
+    {'2015': [10, 12], '2002': [5]}
     """
     return group_by(date_rainfall_list, key)
 
 
-
-def generate_list_of_days(pairs):
-    """generate a list of days given the input document
-
-    >>> generate_list_of_days([['12-FEB-2002', 5], ['12-MAR-2015', 10]])
-    ['12-MAR', '12-FEB']
-    """
-    dates = []
-    for date, amount in pairs:
-        dates += [date[:6]]
-    dates = list(set(dates))
-    return dates
-
-
-def calculate_rain_by_date(date_rain, days_list):
+def calculate_rain_by_date(date_rain):
     """calculates the average rainfall by date of the year
 
-    >>> calculate_rain_by_date([['12-FEB-2002', 5], ['12-FEB-2012', 5], ['12-MAR-2015', 10]], ['12-MAR', '12-FEB'])
+    >>> calculate_rain_by_date([['12-FEB-2002', 5], ['12-FEB-2012', 5], ['12-MAR-2015', 10]])
     {'12-MAR': [10], '12-FEB': [5, 5]}
     """
-    list_of_averages = {}
-    for day in days_list:
-        rain_val_list = []
-        for date, rain_inches in date_rain:
-            if day in date:
-                rain_val_list += [rain_inches]
-                list_of_averages.update({day: rain_val_list})
-    return list_of_averages
+
+    return group_by(date_rain, date_key)
 
 
-def calculate_average_rain_by_date(day_rain_dic, days):
+
+
+def calculate_average_rain_by_date(day_rain_dict):
     """Finds the average rain by day of year
 
-    >>> calculate_average_rain_by_date({'12-MAR': [10], '12-FEB': [5, 60]}, ['12-MAR', '12-FEB'])
+    >>> calculate_average_rain_by_date({'12-MAR': [10], '12-FEB': [5, 60]})
     {32.5: '12-FEB', 10: '12-MAR'}
     """
-    avg_dic = {}
-    for day in days:
-        value_to_avg = day_rain_dic.get(day)
-        avg_rain = statistics.mean(value_to_avg)
-        avg_dic.update({avg_rain: day})
-    return avg_dic
+    for day in day_rain_dict:
+        day_rain_dict[day] = statistics.mean(day_rain_dict[day])
+    return day_rain_dict
 
 
 def calculate_highest_average_rain_day(rain_dict):
     """searches the rainfall dict and finds the date with max rain
 
-    >>> calculate_highest_average_rain_day({32.5: '12-FEB', 10: '12-MAR'})
+    # >>> calculate_highest_average_rain_day({32.5: '12-FEB', 10: '12-MAR'})
     '12-FEB'
     """
-    max_rain = max(rain_dict)
-    output = rain_dict.get(max_rain)
-    return output
+    temp_rain = 0
+    temp_date = ''
+    for day in rain_dict:
+        if rain_dict[day] > temp_rain:
+            temp_rain = rain_dict[day]
+            temp_date = day
+    return temp_date
 
 
-def generate_list_of_years(data_table):
-    """Returns a list of the years in the data table.
-
-    >>> sorted(generate_list_of_years([['12-FEB-2002', 5], ['12-MAR-2015', 10]]))
-    ['2002', '2015']
-    """
-    years = [date[7:13] for date, rain in data_table]
-    output = (list(set(years)))
-    return output
-
-
-def find_rainiest_year(year_rain_list):
+def find_rainiest_year(year_rain_dict):
     """ Puts the year and year total value in a dictionary and returns the key of the max value
 
-    >>> find_rainiest_year([['2002', 5], ['2015', 10]])
+    >>> find_rainiest_year({'2002': [5], '2015': [10]})
     '2015'
     """
-    year_rain_dict = {x[1]: x[0] for x in year_rain_list}
-    max_year = max(year_rain_dict)
-    val_of_max = year_rain_dict[max_year]
-    return val_of_max
+
+    for year in year_rain_dict:
+        year_rain_dict[year] = sum(year_rain_dict[year])
+    max_rain_temp = 0
+    max_rain_year_temp = ''
+    for year in year_rain_dict:
+        if year_rain_dict[year] > max_rain_temp:
+            max_rain_temp = year_rain_dict[year]
+            max_rain_year_temp = year
+    return max_rain_year_temp
+
+
 
 
 def output_function(year, day, high_rain_day):
@@ -187,7 +177,7 @@ def output_function(year, day, high_rain_day):
     """
     print('The raniest year at this sensor was: ' + year)
     print('The raniest day at this sensor was: ' + day)
-    print('The highest average rainfall is: ' + high_rain_day)
+    print('The highest average rainfall is: {}'.format(high_rain_day))
     return
 
 
@@ -199,11 +189,9 @@ def main():
     date_and_rainfall = purge_unneccessary_data(data_as_lists)
     date_rainfall_list = convert_to_int(date_and_rainfall)
     rainiest_date = check_for_most_rain(date_rainfall_list)
-    list_of_days = generate_list_of_days(date_rainfall_list)
-    rain_by_day = calculate_rain_by_date(date_rainfall_list, list_of_days)
-    average_rain_by_date = calculate_average_rain_by_date(rain_by_day, list_of_days)
+    rain_by_day = calculate_rain_by_date(date_rainfall_list)
+    average_rain_by_date = calculate_average_rain_by_date(rain_by_day)
     highest_average_rainfall_date = calculate_highest_average_rain_day(average_rain_by_date)
-    list_of_years = generate_list_of_years(date_rainfall_list)
     total_rain_per_year = calculate_rain_by_year(date_rainfall_list)
     most_rain_in_a_year = find_rainiest_year(total_rain_per_year)
     output_function(most_rain_in_a_year, rainiest_date, highest_average_rainfall_date)
