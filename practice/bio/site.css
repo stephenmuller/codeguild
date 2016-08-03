@@ -37,3 +37,7 @@ img {
    border:10px solid #021a40;
    border-radius: 25px;
 }
+
+a {
+    color: pink;
+}
