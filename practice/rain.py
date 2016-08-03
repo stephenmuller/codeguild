@@ -127,8 +127,9 @@ def calculate_average_rain_by_date(day_rain_dict):
     >>> calculate_average_rain_by_date({'12-MAR': [10], '12-FEB': [5, 60]})
     {32.5: '12-FEB', 10: '12-MAR'}
     """
-    for day in day_rain_dict:
-        day_rain_dict[day] = statistics.mean(day_rain_dict[day])
+    # for day in day_rain_dict:
+    #     day_rain_dict[day] = statistics.mean(day_rain_dict[day])
+    day_rain_dict = {day_rain_dict: statistics.mean(day_rain_dict[day]) for day in day_rain_dict}
     return day_rain_dict
 
 
