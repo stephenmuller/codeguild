@@ -1,0 +1,31 @@
+div {
+  border: 1px solid black;
+}
+
+.flex-boxes {
+    display: flex;
+    margin: 20px;
+    justify-content: space-between;
+    height: auto;
+}
+
+.big-interior{
+  flex: 1;
+}
+
+.interior-three-quarters{
+  flex: 3;
+}
+
+.interior-one-quarter{
+  flex: 1;
+}
+
+.one-third{
+  width: 90px;
+}
+
+.flex-boxes > div {
+  margin: 10px;
+  height: 76px;
+}
