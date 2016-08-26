@@ -1,21 +1,45 @@
 """pantheon Models."""
+
+
 import csv
 
+
 def import_tsv():
-    with open('pantheon/pantheon.tsv') as tsvfile:
-        reader = csv.DictReader(tsvfile)
-        print(reader)
-
-# def convert_to_dictionary_of_people():
-#     """map the IDs to the various people in dictionary format"""
-#     imported_data = import_tsv()
-#     keys = imported_data[0]
-#     people_data = imported_data[1:]
-#     output = {for in people_data}
+    with open('pantheon/pantheon.tsv') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter='\t')
+        return [person for person in reader]
 
 
+def generate_countries(array_of_objects):
+    """iterates through array returns list of countries"""
+    return [dict['countryCode'] for dict in array_of_objects]
 
-#
+
+def industries_by_country(array_of_objects, country):
+    """does things"""
+    return [item['industry'] for item in array_of_objects if item['countryCode'] == country]
+
+
+def people_in_industry(country_code, industry):
+    """add complexity"""
+    return [
+        item
+        for item in TSV_DATA
+        if item['countryCode'] == country_code if item['industry'] == industry
+        ]
+
+
+def make_person_object(curid):
+    """..... """
+    for item in TSV_DATA:
+        if item['en_curid'] == curid:
+            return item
+
+
+
+TSV_DATA = import_tsv()
+
+
 # ['en_curid', 'name', 'numlangs', 'birthcity', 'birthstate', 'countryName', 'countryCode', 'countryCode3', 'LAT', 'LON',
 #  'continentName', 'birthyear', 'gender', 'occupation', 'industry', 'domain', 'TotalPageViews', 'L_star',
 #  'StdDevPageViews', 'PageViewsEnglish', 'PageViewsNonEnglish', 'AverageViews', 'HPI']

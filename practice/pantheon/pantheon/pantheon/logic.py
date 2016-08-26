@@ -1,6 +1,7 @@
 """pantheon Logic."""
 
 import csv
+from . import models
 
 def dump_tsv():
     with open('pantheon/pantheon.tsv', newline='') as tsvfile:
@@ -9,11 +10,28 @@ def dump_tsv():
             print(row)
 
 
+def generate_template_obj_for_index():
+    """comment here"""
+    unique_countries = set(models.generate_countries(models.TSV_DATA))
+    return [item for item in unique_countries if item != '']
+
+
+def generate_template_obj_for_country(country_id):
+    """comment here"""
+    unique_industries = set(models.industries_by_country(models.TSV_DATA, country_id))
+    return [item for item in unique_industries if item != '']
+
+
+def generate_names_for_industry_page(country_code, industry):
+    """...."""
+    list_of_dicts = models.people_in_industry(country_code, industry)
+    return [obj['name'] for obj in list_of_dicts]
 
 #
+#
+#
 # ['en_curid', 'name', 'numlangs', 'birthcity', 'birthstate', 'countryName', 'countryCode', 'countryCode3', 'LAT', 'LON',
-#  'continentName', 'birthyear', 'gender', 'occupation', 'industry', 'domain', 'TotalPageViews', 'L_star',
+#  # 'continentName', 'birthyear', 'gender', 'occupation', 'industry', 'domain', 'TotalPageViews', 'L_star',
 #  'StdDevPageViews', 'PageViewsEnglish', 'PageViewsNonEnglish', 'AverageViews', 'HPI']
 # ['307', 'Abraham Lincoln', '131', 'Hodgenville', 'KY', 'UNITED STATES', 'US', 'USA', '37.571111', '-85.738611',
-#  'North America', '1809', 'Male', 'POLITICIAN', 'GOVERNMENT', 'INSTITUTIONS', '66145211', '5.801386687', '586914.722',
-#  '41477236', '24667975', '504925.2748', '27.93858549']
+#  'North America', '1809', 'Male', 'POLITICIAN', 'GOVERNMENT', 'INSTITUTIONS', '66145211', '5.801386687', '586914.722', '41477236', '24667975', '504925.2748', '27.93858549']
