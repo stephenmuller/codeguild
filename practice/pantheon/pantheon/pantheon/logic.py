@@ -22,14 +22,7 @@ def generate_template_obj_for_country(country_id):
     return [item for item in unique_industries if item != '']
 
 
-def generate_names_for_industry_page(country_code, industry):
-    """...."""
-    list_of_dicts = models.people_in_industry(country_code, industry)
-    return [obj['name'] for obj in list_of_dicts]
 
-#
-#
-#
 # ['en_curid', 'name', 'numlangs', 'birthcity', 'birthstate', 'countryName', 'countryCode', 'countryCode3', 'LAT', 'LON',
 #  # 'continentName', 'birthyear', 'gender', 'occupation', 'industry', 'domain', 'TotalPageViews', 'L_star',
 #  'StdDevPageViews', 'PageViewsEnglish', 'PageViewsNonEnglish', 'AverageViews', 'HPI']

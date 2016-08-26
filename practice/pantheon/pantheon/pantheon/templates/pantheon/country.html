@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Of Industries</title>
+    <link rel="stylesheet" href="{% static 'pantheon/site.css' %}">
+</head>
+<body>
+    <ul id="industries">
+        {% for object in industries %}
+        <li><a href="{% url 'persons_in_industry' country object  %}">{{ object }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

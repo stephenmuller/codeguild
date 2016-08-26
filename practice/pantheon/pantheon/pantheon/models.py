@@ -4,10 +4,15 @@
 import csv
 
 
-def import_tsv():
-    with open('pantheon/pantheon.tsv') as csvfile:
-        reader = csv.DictReader(csvfile, delimiter='\t')
-        return [person for person in reader]
+# def import_tsv():
+#     with open('pantheon/pantheon.tsv') as csvfile:
+#         reader = csv.DictReader(csvfile, delimiter='\t')
+#         return [person for person in reader]
+
+
+with open('pantheon/pantheon.tsv') as csvfile:
+    reader = csv.DictReader(csvfile, delimiter='\t')
+    TSV_DATA = [person for person in reader]
 
 
 def generate_countries(array_of_objects):
@@ -36,8 +41,14 @@ def make_person_object(curid):
             return item
 
 
+NAMES_TO_CUR_ID = {
+    person['name']: person['en_curid']
+    for person
+    in TSV_DATA
+}
 
-TSV_DATA = import_tsv()
+
+
 
 
 # ['en_curid', 'name', 'numlangs', 'birthcity', 'birthstate', 'countryName', 'countryCode', 'countryCode3', 'LAT', 'LON',
