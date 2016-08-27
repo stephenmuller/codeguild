@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from . import models
 from . import logic
+from . import private
 
 
 def index(request):
@@ -33,13 +34,16 @@ def persons_in_industry(request, country_code, industry):
 def description_for_person(request, cur_id):
     """Prints information about person"""
     person = models.make_person_object(cur_id)
-    print(cur_id)
     template_arguements = {
         'gender': person['gender'],
         'name': person['name'],
         'birth_year': person['birthyear'],
         'country': person['countryName'],
-        'occupation': person['occupation']
+        'occupation': person['occupation'],
+        'url': 'https://maps.googleapis.com/maps/api/js?key=' + private.API_KEY + '&callback=initMap',
+        'coord': {'lat': person['LAT'], 'lon': person['LON']}
+
+
     }
     return render(request, 'pantheon/person_page.html', template_arguements)
 

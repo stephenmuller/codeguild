@@ -4,12 +4,6 @@
 import csv
 
 
-# def import_tsv():
-#     with open('pantheon/pantheon.tsv') as csvfile:
-#         reader = csv.DictReader(csvfile, delimiter='\t')
-#         return [person for person in reader]
-
-
 with open('pantheon/pantheon.tsv') as csvfile:
     reader = csv.DictReader(csvfile, delimiter='\t')
     TSV_DATA = [person for person in reader]

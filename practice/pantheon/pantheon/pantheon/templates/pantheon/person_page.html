@@ -6,13 +6,20 @@
     <title>{{ name }}</title>
     <link rel="stylesheet" href="{% static 'pantheon/site.css' %}">
 </head>
-<body class={{ gender }}>
+<body class="{{ gender }}">
     <h2>{{name}}</h2>
     <ul>
         <li>{{ birth_year }}</li>
         <li>{{ country }}</li>
         <li>{{ occupation }}</li>
-        <li>{{ googlemaplink }}</li>
     </ul>
+
+    <div id="map"></div>
+        <script>
+        var latLon = "{{coord}}";
+    </script>
+    <script src="{% static 'pantheon/pantheon.js' %}"></script>
+
+    <script src="{{ url }}"  async defer></script>
 </body>
 </html>
