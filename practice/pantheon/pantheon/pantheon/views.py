@@ -41,7 +41,8 @@ def description_for_person(request, cur_id):
         'country': person['countryName'],
         'occupation': person['occupation'],
         'url': 'https://maps.googleapis.com/maps/api/js?key=' + private.API_KEY + '&callback=initMap',
-        'coord': {'lat': str(person['LAT']), 'lon': str(person['LON'])}
+        'coord': {'lat': person['LAT'], 'lon': person['LON']}
     }
+    print(template_arguements['coord'])
     return render(request, 'pantheon/person_page.html', template_arguements)
 

@@ -6,7 +6,7 @@ import csv
 
 with open('pantheon/pantheon.tsv') as csvfile:
     reader = csv.DictReader(csvfile, delimiter='\t')
-    TSV_DATA = [person for person in reader]
+    TSV_DATA = list(reader)
 
 
 def generate_countries(array_of_objects):
