@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>summary</title>
+</head>
+<body>
+    <h1>Favorites!</h1>
+
+    {% for flavor in favorites %}
+    <li>{{ flavor.0 }} {{  flavor.1 }}</li>
+    {% endfor  %}
+
+    <p> <a href="{% url 'submission' %}">Submit another vote?</a> </p>
+</body>
+</html>
