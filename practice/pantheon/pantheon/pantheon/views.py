@@ -34,6 +34,7 @@ def persons_in_industry(request, country_code, industry):
 def description_for_person(request, cur_id):
     """Prints information about person"""
     person = models.make_person_object(cur_id)
+    print(person['LAT'], person['LON'])
     template_arguements = {
         'gender': person['gender'],
         'name': person['name'],
@@ -41,9 +42,7 @@ def description_for_person(request, cur_id):
         'country': person['countryName'],
         'occupation': person['occupation'],
         'url': 'https://maps.googleapis.com/maps/api/js?key=' + private.API_KEY + '&callback=initMap',
-        'coord': {'lat': person['LAT'], 'lon': person['LON']}
-
-
+        'coord': {'lat': str(person['LAT']), 'lon': str(person['LON'])}
     }
     return render(request, 'pantheon/person_page.html', template_arguements)
 

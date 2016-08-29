@@ -16,7 +16,10 @@
 
     <div id="map"></div>
         <script>
-        var latLon = "{{coord}}";
+        var latLon = {
+            lat: {{ coord.lat }},
+            lon: {{ coord.lon }}
+            };
     </script>
     <script src="{% static 'pantheon/pantheon.js' %}"></script>
 
