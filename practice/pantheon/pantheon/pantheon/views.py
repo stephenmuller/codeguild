@@ -34,7 +34,6 @@ def persons_in_industry(request, country_code, industry):
 def description_for_person(request, cur_id):
     """Prints information about person"""
     person = models.make_person_object(cur_id)
-    print(person['LAT'], person['LON'])
     template_arguements = {
         'gender': person['gender'],
         'name': person['name'],

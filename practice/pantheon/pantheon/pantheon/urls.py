@@ -23,24 +23,3 @@ urlpatterns = [
     url(r'^country/(?P<country_code>.+)', views.all_industries_for_country, name='industries_for_country'),
     url(r'^persons/(?P<cur_id>.+)', views.description_for_person, name='description_for_person')
 ]
-
-
-# We're going to make a web interface for the dataset. Include a static style sheet that styles all of the pages.
-#
-# GET / will list of all countries and link each one to the below country listing page.
-#
-# GET /country/COUNTRY_CODE will list all industries known for a country and link each one to the below industry listing page.
-#
-# GET /country/COUNTRY_CODE/industry/INDUSTRY will list all persons in that industry and link each one to the below person description page.
-#
-# GET /persons/CUR_ID will show a description page for a specific person. Render a HTML page in a pretty way that displays:
-#
-# Name
-# Birth Year
-# Country
-# Occupation
-# Google Map of Location (include static JS to perform this)
-# (Trite, but) have the page style be templated to be pink or blue on the gender of the person
-
-
-# ?P<symbol>.+)
