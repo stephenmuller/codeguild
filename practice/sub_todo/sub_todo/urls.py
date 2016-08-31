@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', views.render_todo_list, name='todo_list'),
     url(r'^add', views.render_add, name='add'),
     url(r'^submit', views.render_submit_new_main, name='submit_new_main'),
     url(r'^(?P<main_item_id>.+)/add', views.render_add_item_to_main_item, name='add_item_to_main_item'),
