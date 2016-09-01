@@ -1,5 +1,7 @@
 """sub_todo Admin Configuration."""
 
+from django.contrib import admin
+from . import models
 
-
-# Make sure the admin page is wired up and modifications there are reflected in the main page.
+admin.site.register(models.MainItem)
+admin.site.register(models.SubItem)

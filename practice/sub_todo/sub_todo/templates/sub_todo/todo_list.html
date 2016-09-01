@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+    <h1>Things to do:</h1>
+    {% for main_task in main_tasks %}
+    <h3> {{ main_task }} <a href="{% url 'add_sub_item' main_task.id %}">+</a> </h3>
+    <ul>
+        {% for sub_task in main_task.sub_items.all %}
+        <li>
+            {{ sub_task }}
+            <a href="{% url 'sub_item_delete' main_task.id sub_task.id %}">X</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+    <a href="{% url 'add_main_item' %}">add main item</a>
+    {% csrf_token %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'sub_todo/site.js' %}"></script>
+</body>
+</html>

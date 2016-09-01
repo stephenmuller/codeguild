@@ -4,17 +4,17 @@ from django.db import models
 
 
 class MainItem(models.Model):
-    to_do_category = models.TextField()
+    name = models.TextField()
 
     def __str__(self):
-        return self.to_do_category
+        return self.name
 
     def __repr__(self):
-        return 'MainItem(to_do_category={!r}'.format(self.to_do_category)
+        return 'MainItem(name={!r}'.format(self.name)
 
 
 class SubItem(models.Model):
-    main_item = models.ForeignKey(MainItem)
+    main_item = models.ForeignKey(MainItem, related_name='sub_items')
     task = models.TextField()
 
     def __str__(self):

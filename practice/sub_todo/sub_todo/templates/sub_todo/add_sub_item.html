@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add sub item</title>
+</head>
+<body>
+    <h2>add sub task</h2>
+
+    <form action="{% url 'ack_sub_item_submit' main_item_id %}" method="POST">
+    {% csrf_token %}
+        <label>Add new sub task: <input type="text" name="new_sub_task"></label>
+        <input type="submit">
+    </form>
+</body>
+</html>
