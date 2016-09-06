@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title
+    <link rel="stylesheet" href="{% static 'bookstats/site.css' %}">
+</head>
+<body>
+
+    <form id="word-source" action="{% url 'search' %}" method="get">
+    <p><textarea name="source-str"></textarea></p>
+    <p><input type="submit"></p>
+    </form>
+
+    <div id="display_stats">
+        {{ word_count }}
+        {{ word_frequency }}
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-2.2.3.js"></script>
+    <script src="{% static 'bookstats/ajax_csrf_setup.js' %}"></script>
+    <script src="{% static 'bookstats/site.js' %}"></script>
+</body>
+</html>

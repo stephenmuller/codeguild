@@ -1,0 +1,1 @@
+"""bookstats Admin Configuration."""
