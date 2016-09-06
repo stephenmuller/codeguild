@@ -9,13 +9,11 @@
 <body>
 
     <form id="word-source" action="{% url 'search' %}" method="get">
-    <p><textarea name="source-str"></textarea></p>
+    <p><textarea name="word"></textarea></p>
     <p><input type="submit"></p>
     </form>
 
     <div id="display_stats">
-        {{ word_count }}
-        {{ word_frequency }}
     </div>
 
 

@@ -1,23 +1,22 @@
 """bookstats Models."""
 
-import csv
 
-BOOK_AS_LIST = []
+with open('bookstats/static/bookstats/pg345.txt') as f:
+     imported_data = f.read()
 
 
-with open('static/bookstats/pg345.txt', newline='') as inputfile:
-    BOOK_AS_LIST = list(csv.reader(inputfile))
+BOOK_DATA = imported_data.split(' ')
 
 
 def word_count():
     """counts the words in the list"""
-    return len(BOOK_AS_LIST)
+    return len(BOOK_DATA)
 
 
 def get_word_count(word):
     """returns the number of times the word is used in the book"""
     counter = 0
-    for item in BOOK_AS_LIST:
+    for item in BOOK_DATA:
         if item.lower() == word.lower():
             counter += 1
     if counter == 0:

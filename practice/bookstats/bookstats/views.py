@@ -1,15 +1,28 @@
 """bookstats Views."""
 
-def index(request):
+from django.http import JsonResponse
+from django.shortcuts import render
+from . import models
+
+def render_index(request):
     """docstring"""
+    return render(request, 'bookstats/index.html')
 
 
-
-def stats(request):
+def return_stats(request):
     """docstring"""
+    word = request.GET['word']
+    word_count = models.get_word_count(word)
+    word_frequency = models.get_word_frequency(word)
+    json_stats = _convert_stats_to_json_obj(word, word_count, word_frequency)
+    return JsonResponse(json_stats)
 
 
-# GET / an index page with a search form that allows a user to put in a single word
-#
-# GET /stats?word=WORD responds with a JSON object with stats about that word
+def _convert_stats_to_json_obj(word, word_count, word_frequency):
+    return {
+        'word': word,
+        'word_count': word_count,
+        'word_frequency': word_frequency
+    }
+
 
