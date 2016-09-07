@@ -4,9 +4,10 @@ var wordSource = $('#word-source');
 
 
 function updateIndex(statsObj) {
+  console.log('statsObj')
     var statsContainer = $('#display_stats');
-    var statsDisplay = $('<p>' statsObj.word + ' occurs ' + statsObj.word_count + ' times and is '
-    + statsObj.word_frequency ' ratio of all words in book. <p>')
+    var statsDisplay = $('<p>' + statsObj.word + ' occurs ' + statsObj.word_count + ' times and is ' +
+                          statsObj.word_frequency + ' ratio of all words in book.' + ' <p>');
     statsContainer.append(statsDisplay)
 }
 
@@ -14,6 +15,7 @@ function updateIndex(statsObj) {
  * Submit the code form and return a promise with the JSON colored source object.
  */
 function submitForm() {
+  console.log('submitForm')
   var actionURL = wordSource.attr('action');
   var submitMethod = wordSource.attr('method');
   var formData = wordSource.serialize();
@@ -31,9 +33,8 @@ function submitForm() {
  */
 function runSubmitSourceAndUpdate() {
   // Empty the UI right away so that new data can be loaded.
-  emptyResponseElements();
   submitForm().
-    then(updateIndex(statsObj))
+    then(updateIndex)
     // Decode the JSON and call the following function with the resulting JS object.
 }
 
@@ -42,9 +43,10 @@ function runSubmitSourceAndUpdate() {
  * Register form submit event handler.
  */
 function registerGlobalEventHandlers() {
-  sourceForm.on('submit', function(event) {
+  wordSource.on('submit', function(event) {
     event.preventDefault();
     runSubmitSourceAndUpdate();
+    console.log('func');
   });
 }
 

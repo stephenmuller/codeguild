@@ -1,11 +1,25 @@
 """bookstats Models."""
 
+import re
 
 with open('bookstats/static/bookstats/pg345.txt') as f:
      imported_data = f.read()
 
 
-BOOK_DATA = imported_data.split(' ')
+input_data = imported_data.split(' ')
+BOOK_DATA = []
+for word in input_data:
+    word_list = list(word)
+    updated_word = []
+    for char in word_list:
+        match_expression = r"([a-zA-Z'])"
+        if re.match(match_expression, char):
+            updated_word.append(char)
+    updated_word = ''.join(updated_word)
+    if updated_word != '':
+        BOOK_DATA.append(updated_word)
+
+print(BOOK_DATA)
 
 
 def word_count():
