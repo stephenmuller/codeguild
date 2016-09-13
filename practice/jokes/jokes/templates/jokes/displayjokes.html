@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>display jokes</title>
+    <link rel="stylesheet" href="{% static 'jokes/site.css'%}">
+</head>
+<body>
+    <h1>Jokes</h1>
+    {% for joke in joke_list %}
+        <div class="rootelement">
+        <h3> {{ joke.0 }} </h3>
+        <p class="punchline"> {{ joke.1 }} </p>
+        </div>
+    {% endfor %}
+
+    <h3>add more jokes:</h3>
+    <a href="{% url 'submission' %}">add more jokes</a>
+    <script src="https://code.jquery.com/jquery-2.2.3.js"></script>
+    <script src="{% static 'jokes/site.js' %}"></script>
+</body>
+</html>
