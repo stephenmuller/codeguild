@@ -1,0 +1,13 @@
+/*site*/
+.valid {
+  background-color: #33cc33;
+}
+
+.invalid {
+  background-color: yellow;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
