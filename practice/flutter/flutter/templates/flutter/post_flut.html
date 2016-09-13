@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>post here</title>
+</head>
+<body>
+
+    <form action="{% url 'post_submit' %}" method="POST">
+    {% csrf_token %}
+    <label>Add new narcissistic post: <input type="text" name="flut_body"></label>
+    <input type="submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>query</title>
+</head>
+<body>
+    <h1> flutterrrrrrrrrrrrr </h1>
+    <ul>
+    {% for flut in fluts %}
+        <li>{{ flut.text }} {{ flut.time }}</li>
+    {% endfor %}
+    </ul>
+
+<a href="{% url 'index' %}">view latest</a>
+</body>
+</html>

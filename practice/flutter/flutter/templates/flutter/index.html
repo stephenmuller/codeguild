@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flutter homepage</title>
+</head>
+<body>
+    <h1> flutterrrrrrrrrrrrr </h1>
+    <ul>
+    {% for flut in fluts %}
+        <li><h4>{{ flut.text }}</h4> <br>{{ flut.time }}</li>
+    {% endfor %}
+    </ul>
+
+
+    <h3>search:</h3>
+    <form action="{% url 'query_text' %}" method="POST">
+    {% csrf_token %}
+    <label>Search for narcissistic posts: <input type="text" name="search"></label>
+    <input type="submit">
+    </form>
+<a href="{% url 'post_flut' %}">post your boring thoughts here</a>
+</body>
+</html>
